@@ -1,0 +1,9 @@
+[dir01]
+dir = "C:\\ftp\\cam01\\"
+wav = ["./sound/cam01-alena.wav",
+       "./sound/event-PIR.wav"]
+
+[dir02]
+dir = "C:\\ftp\\cam02\\"
+wav = ["./sound/cam02-alena.wav",
+       "./sound/event-PIR.wav"]

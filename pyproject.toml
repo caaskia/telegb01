@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "telegb01"
+version = "0.1.0"
+description = ""
+authors = ["caas <caaskia@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-telegram-bot = "^20.7"
+watchdog = "^4.0.0"
+python-dotenv = "^1.0.1"
+redis = "^5.0.1"
+pygame = "^2.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
