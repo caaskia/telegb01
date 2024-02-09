@@ -4,10 +4,12 @@ import json
 import redis
 from mod_telegram import send_telegram_message, send_telegram_photo
 
+
 async def process_message(msg, img):
     # Send message and photo to Telegram
     await send_telegram_message(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, msg)
     await send_telegram_photo(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, img)
+
 
 async def consume_messages():
     redis_client = redis.Redis(host='localhost', port=6379, db=0)
@@ -22,6 +24,7 @@ async def consume_messages():
 
             # Ensure proper asynchronous handling
             await process_message(msg, img)
+        await asyncio.sleep(3)
 
 if __name__ == '__main__':
 

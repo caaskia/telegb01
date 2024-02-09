@@ -13,6 +13,8 @@ logging.getLogger("watchdog.observers.inotify_buffer").setLevel(logging.ERROR)
 
 logging.basicConfig(level=logging.DEBUG, format="%(module)s - %(message)s")
 
+logging.debug("rec_2024-02-09_v.0.0.2")
+
 
 class FileHandler(FileSystemEventHandler):
 
