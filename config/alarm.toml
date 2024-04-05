@@ -8,3 +8,8 @@ wav = ["./sound/cam01-alena.wav",
 dir = "/mnt/data/ftp/cam02/"
 wav = ["./sound/cam02-alena.wav",
        "./sound/event-PIR.wav"]
+
+[dir03]
+dir = "/mnt/data/ftp/cam535/"
+wav = ["./sound/cam03-alena.wav",
+       "./sound/event-PIR.wav"]

@@ -28,7 +28,7 @@ class FileHandler(FileSystemEventHandler):
             return
         now = time.strftime('%Y-%m-%d %H:%M:%S')
 
-        msg = f"{now} - Сработка с камеры 1: {event.src_path}"
+        msg = f"{now} - Сработка с камеры: {event.src_path}"
         logging.warning(msg)
 
         img = event.src_path
