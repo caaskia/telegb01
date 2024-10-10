@@ -1,0 +1,78 @@
+================
+Последние логи:
+---------------
+journalctl -f --user-unit bk_camwatch02
+==================
+loginctl enable-linger lynx
+loginctl user-status lynx
+----------
+
+
+=============================================
+nano $HOME/.local/bin/camwatch02
+-----------------------------------------
+#!/bin/bash
+PATH="$PATH:$HOME/telegb02"
+
+case "$1" in
+start)
+cd $HOME/telegb02
+poetry run python cam_watch02.py
+;;
+
+stop)
+pkill -f cam_watch02.py
+;;
+
+restart)
+$0 stop
+$0 start
+;;
+esac
+exit 0
+--------------------------------------------------------
+chmod +x $HOME/.local/bin/camwatch02
+=========================================================
+
+=========================================================
+systemctl edit --user --force --full bk_camwatch02.service
+-----------------------------------------------------------
+[Unit]
+Description=bk_camwatch02 - Send msg to channel
+
+[Service]
+Type=simple
+WorkingDirectory=/home/lynx/.local/bin
+ExecStart=/bin/sh /home/lynx/.local/bin/camwatch02 start
+ExecStop=/bin/kill -HUP $MAINPID
+# ExecStop=/bin/sh /home/lynx/.local/bin/camwatch02 stop
+ExecReload=/bin/sh /home/lynx/.local/bin/camwatch02 restart
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=default.target
+
+----------------------------------------------------------
+
+Включаем юнит в автозагрузку при старте системы.
+systemctl --user enable bk_camwatch02.service  && systemctl --user daemon-reload
+
+systemctl --user start bk_camwatch02
+systemctl --user stop bk_camwatch02
+systemctl --user restart bk_camwatch02
+-------------------------------------------
+systemctl --user -l status bk_camwatch02
+=================
+Последние логи:
+----------------
+journalctl -f --user-unit bk_camwatch02
+Логи:
+journalctl --user-unit bk_camwatch02
+
+---------------------------------------------
+Удаляем из автозагрузки (при необходимости)
+systemctl --user disable bk_camwatch02.service
+======================================================
+systemctl --user --all | grep bk_
+======================================================

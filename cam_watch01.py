@@ -6,14 +6,11 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import json
 import redis
+
 import logging
-
-# Configure the root logger to ignore watchdog messages of specific severity
 logging.getLogger("watchdog.observers.inotify_buffer").setLevel(logging.ERROR)
-
 logging.basicConfig(level=logging.DEBUG, format="%(module)s - %(message)s")
-
-logging.debug("rec_2024-02-09_v.0.0.2")
+logging.debug("cam_watch01_2024-04-12_v.0.0.3")
 
 
 class FileHandler(FileSystemEventHandler):
@@ -50,7 +47,7 @@ def monitor_directory(dir_watch, wav_path, redis_client):
 
     try:
         observer.start()
-        print(f"Watching directory: {dir_watch}")
+        logging.info(f"Watching directory: {dir_watch}")
 
         while True:
             time.sleep(1)
@@ -68,7 +65,7 @@ def main():
         config = toml.load(f)
 
     if not config:
-        print(f"No config loaded from {path_config}")
+        logging.error(f"No config loaded from {path_config}")
         exit(1)
 
     # Connect to Redis

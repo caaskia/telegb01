@@ -4,6 +4,11 @@ import json
 import redis
 from mod_telegram import send_telegram_message, send_telegram_photo
 
+import logging
+logging.getLogger("watchdog.observers.inotify_buffer").setLevel(logging.ERROR)
+logging.basicConfig(level=logging.DEBUG, format="%(module)s - %(message)s")
+logging.debug("cambot_2024-04-12_v.0.0.3")
+
 
 async def process_message(msg, img):
     # Send message and photo to Telegram
@@ -14,6 +19,9 @@ async def process_message(msg, img):
 async def consume_messages():
     redis_client = redis.Redis(host='localhost', port=6379, db=0)
     pubsub = redis_client.pubsub()
+    id_channel = 'messages_535'
+    pubsub.subscribe(id_channel)
+    logging.info(f"Watching channel: {id_channel}")
     pubsub.subscribe('telegram_messages')
 
     for message in pubsub.listen():

@@ -1,0 +1,19 @@
+#!/bin/bash
+PATH="$PATH:$HOME/telegb01"
+
+case "$1" in
+start)
+cd $HOME/telegb01
+poetry run python cam_watch01.py
+;;
+
+stop)
+pkill -f cam_watch01.py
+;;
+
+restart)
+$0 stop
+$0 start
+;;
+esac
+exit 0

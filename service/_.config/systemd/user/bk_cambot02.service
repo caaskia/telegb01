@@ -1,0 +1,15 @@
+[Unit]
+Description=bk_cambot02 - Send msg to channel
+
+[Service]
+Type=simple
+WorkingDirectory=/home/lynx/.local/bin
+ExecStart=/bin/sh /home/lynx/.local/bin/cambot02 start
+ExecStop=/bin/kill -HUP $MAINPID
+# ExecStop=/bin/sh /home/lynx/.local/bin/cambot02 stop
+ExecReload=/bin/sh /home/lynx/.local/bin/cambot02 restart
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=default.target
